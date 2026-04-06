@@ -7,6 +7,6 @@ These files that are in this repo can be anything from:
 - Key functions without explanations for what
 - Parts of projects that I have not yet tested or want to throw away. For this reason
 
-I will not keep documentation on what all this is, if you are interested in something in this repo and want to know more, you are welcome to contact me
-[**Github**](https://github.com/jimmykallhagen)
-Mail - **TheEnchantedPotato@proton.me**
+I will not keep documentation on what all this is, if you are interested in something in this repo and want to know more, you are welcome to contact me on:
+- [**Github**](https://github.com/jimmykallhagen)
+- Mail - **TheEnchantedPotato@proton.me**
