@@ -6,12 +6,12 @@
 
 
 zpool create -f \
-  -o ashift=12 \
-  -o autotrim=on \
-  .o feature@large_dnode=enabled \
-  -O redundant_metadata=most \
-  -O dnodesize=auto \
-  nordix "${ROOT_DISK}"
+        -o ashift=12 \
+        -o autotrim=on \
+        -o feature@large_dnode=enabled \
+        -O redundant_metadata=most \
+        -O dnodesize=auto \
+        nordix  "${ROOT_DISK}"
 
 }
     
@@ -20,231 +20,230 @@ zfs create -o mountpoint=none \
 nordix/ROOT
 
 
-zfs create -o mountpoint=none \
--o canmount=noauto \
--o compression=zstd-5 \
--o recordsize=34k \
--o atime=off \
--o copies=2 \
--o checksum=fletcher4 \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
-nordix/ROOT/default
+zfs create -o mountpoint=/ \
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=64k \
+      -o atime=off \
+      -o copies=2 \
+      -o checksum=fletcher4 \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      nordix/ROOT/default
  
 
 
 
    
 zfs create -o mountpoint=/var/cache \
--o canmount=on \
--o compression=zstd-1 \
--o recordsize=32k \
--o atime=off \
--o sync=standard \
--o xattr=sa \
--o copies=1 \
--o checksum=fletcher4 \
--o acltype=off \
--o logbias=throughput \
--o primarycache=all \
--o secondarycache=all \
--o exec=off -o setuid=off -o devices=off nordix/varcache
+      -o canmount=on \
+      -o compression=zstd-1 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o sync=standard \
+      -o xattr=sa \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o acltype=off \
+      -o logbias=throughput \
+      -o primarycache=all \
+      -o secondarycache=all \
+      -o exec=off -o setuid=off -o devices=off nordix/varcache
 
 
 
    
 zfs create -o mountpoint=/var/log \
--o canmount=noauto \
--o compression=zstd-10 \
--o recordsize=32k \
--o atime=off \
--o sync=disabled \
--o xattr=sa \
--o copies=1 \
--o checksum=fletcher4 \
--o devices=off \
--o acltype=posixacl \
--o logbias=throughput \
--o primarycache=metadata \
--o secondarycache=metadata \
--o exec=off -o setuid=off -o devices=off nordix/varlog
+      -o canmount=on \
+      -o compression=zstd-5 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o sync=standard \
+      -o xattr=sa \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o devices=off \
+      -o acltype=posixacl \
+      -o logbias=throughput \
+      -o primarycache=metadata \
+      -o secondarycache=none \
+      -o exec=off -o setuid=off nordix/varlog
 
 
 zfs create -o mountpoint=/var/lib \
--o canmount=on \
--o compression=zstd-5 \
--o recordsize=16k \
--o atime=off \
--o sync=standard \
--o xattr=sa \
--o copies=1 \
--o checksum=fletcher4 \
--o acltype=off \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o devices=off -o setuid=off nordix/varlib
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o sync=standard \
+      -o xattr=sa \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o acltype=off \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=all \
+      -o devices=off -o setuid=off nordix/varlib
 
 zfs create -o mountpoint=/opt \
--o canmount=noauto \
--o compression=zstd-4 \
--o recordsize=128K \
--o atime=off \
--o copies=2 \
--o checksum=fletcher4 \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
-nordix/opt
+      -o canmount=on \
+      -o compression=zstd-4 \
+      -o recordsize=128K \
+      -o atime=off \
+      -o copies=2 \
+      -o checksum=fletcher4 \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      nordix/opt
 
  
 zfs create -o mountpoint=/tmp \
--o canmount=noauto \
--o compression=lz4 \
--o recordsize=32k \
--o atime=off \
--o checksum=off \
--o copies=1 \
--o xattr=sa \
--o setuid=off \
--o devices=off \
--o acltype=posixacl \
--o sync=disabled \
--o logbias=throughput \
--o primarycache=metadata \
--o secondarycache=metadata \
--o exec=off -o setuid=off -o devices=off nordix/tmp
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=64k \
+      -o atime=off \
+      -o checksum=off \
+      -o copies=1 \
+      -o xattr=sa \
+      -o setuid=off \
+      -o devices=off \
+      -o acltype=posixacl \
+      -o sync=disabled \
+      -o logbias=throughput \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o exec=off nordix/tmp
 
     
 zfs create -o mountpoint=/var/tmp \
--o canmount=noauto \
--o compression=lz4 \
--o recordsize=32k \
--o atime=off \
--o checksum=fletcher4 \
--o copies=1 \
--o xattr=sa \
--o setuid=off \
--o devices=off \
--o acltype=posixacl \
--o sync=standard \
--o logbias=throughput \
--o primarycache=metadata \
--o secondarycache=metadata \
--o setuid=off -o devices=off nordix/vartmp
+      -o canmount=noauto \
+      -o compression=lz4 \
+      -o recordsize=64k \
+      -o atime=off \
+      -o checksum=fletcher4 \
+      -o copies=1 \
+      -o xattr=sa \
+      -o setuid=off \
+      -o devices=off \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o logbias=throughput \
+      -o primarycache=metadata \
+      -o secondarycache=none nordix/vartmp
 
 zfs create -o mountpoint=/home \
--o canmount=noauto \
--o compression=zstd-1 \
--o recordsize=64K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=throughput \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home
+      -o canmount=noauto \
+      -o compression=zstd-3 \
+      -o recordsize=128K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=throughput \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home
 
 zfs create -o mountpoint=$HOME/.cache \
 -o canmount=on \
--o compression=zstd5 \
--o recordsize=16k \
--o atime=off \
--o sync=standard \
--o xattr=sa \
--o copies=1 \
--o checksum=fletcher4 \
--o acltype=off \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o exec=off -o setuid=off -o devices=off nordix/home/cache
+      -o compression=lz4 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o sync=standard \
+      -o xattr=sa \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o acltype=off \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o exec=off -o setuid=off -o devices=off nordix/home/cache
 
 zfs create -o mountpoint=$HOME/Games \
 -o canmount=on \
--o compression=zstd-4 \
--o recordsize=1M \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/games
+      -o compression=lz4 \
+      -o recordsize=1M \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/games
 
 zfs create -o mountpoint=$HOME/Wine-prefix \
 -o canmount=on \
--o compression=zstd-5 \
--o recordsize=32K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
+      -o compression=zstd-5 \
+      -o recordsize=32K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=metadata \
 -o secondarycache=all \
--o setuid=off -o devices=off nordix/home/wine-prefix
+      -o setuid=off -o devices=off nordix/home/wine-prefix
 
 zfs create -o mountpoint=$HOME/Documents \
--o canmount=on \
--o compression=zstd-5 \
--o recordsize=32K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/documents
+      -o canmount=on \
+      -o compression=zstd-5 \
+      -o recordsize=32K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=metadata \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/documents
 
 zfs create -o mountpoint=$HOME/.config \
--o canmount=on \
--o compression=zstd-5 \
--o recordsize=32K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/config
+      -o canmount=on \
+      -o compression=zstd-5 \
+      -o recordsize=32K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=metadata \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/config
 
 
 zfs create -o mountpoint=$HOME/Pictures \
 -o canmount=on \
--o compression=lz4 \
--o recordsize=1M \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=throughput \
--o primarycache=metadata \
--o secondarycache=none\
--o exec=off -o setuid=off -o devices=off nordix/home/pictures
+      -o compression=lz4 \
+      -o recordsize=1M \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=throughput \
+      -o primarycache=metadata \
+      -o secondarycache=none \
+      -o exec=off -o setuid=off -o devices=off nordix/home/pictures
 
 zfs create -o mountpoint=$HOME/Videos \
 -o canmount=on \
@@ -292,34 +291,34 @@ zfs create -o mountpoint=$HOME/Download \
 -o devices=off -o setuid=off nordix/home/downloads
 
 zfs create -o mountpoint=$HOME/.local \
--o canmount=on \
--o compression=lz4 \
--o recordsize=32k \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=metatata \
--o primarycache=metadata \
--o secondarycache=none \
--o setuid=off -o devices=off nordix/home/local
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=metadata \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/local
 
 zfs create -o mountpoint=$HOME/.local/share/lutris \
--o canmount=on \
--o compression=lz4 \
--o recordsize=32k \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=metatata \
--o primarycache=metadata \
--o secondarycache=none \
--o setuid=off -o devices=off nordix/home/local/lutris
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=32k \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/local/lutris
 
 zfs create -o mountpoint=$HOME/.local/share/Steam \
 -o canmount=on \
@@ -337,50 +336,49 @@ zfs create -o mountpoint=$HOME/.local/share/Steam \
 -o setuid=off -o devices=off nordix/home/local/steam
 
 zfs create -o mountpoint=$HOME/.local/share/Steam/steamapps/common \
--o canmount=on \
--o compression=zstd-4 \
--o recordsize=1M \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/local/steam/game
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=1M \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=all \
+      -o setuid=off -o devices=off nordix/home/local/steam/game
 
 zfs create -o mountpoint=$HOME/.local/share/Steam/compatibilitytools.d \
--o canmount=on \
--o compression=zstd-5 \
--o recordsize=32K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher4 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/local/steam/proton
-
+      -o canmount=on \
+      -o compression=zstd-5 \
+      -o recordsize=32K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher4 \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=none \
+      -o setuid=off -o devices=off nordix/home/local/steam/proton
 
 zfs create -o mountpoint=/home/core/.local/share/Steam/steamapps/shadercache \
--o canmount=on \
--o compression=zstd-5 \
--o recordsize=16K \
--o atime=off \
--o xattr=sa \
--o acltype=posixacl \
--o sync=standard \
--o copies=1 \
--o checksum=fletcher2 \
--o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home/local/steam/shadercache
+      -o canmount=on \
+      -o compression=lz4 \
+      -o recordsize=32K \
+      -o atime=off \
+      -o xattr=sa \
+      -o acltype=posixacl \
+      -o sync=standard \
+      -o copies=1 \
+      -o checksum=fletcher2 \
+      -o logbias=latency \
+      -o primarycache=all \
+      -o secondarycache=all \
+      -o setuid=off -o devices=off nordix/home/local/steam/shadercache
 
 
 
