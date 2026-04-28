@@ -2,9 +2,11 @@
 zpool create -f \
   -o ashift=12 \
   -o autotrim=on \
-  .o feature@large_dnode=enabled \
+  -o feature@large_dnode=enabled \
   -O redundant_metadata=most \
   -O dnodesize=auto \
+-O mountpoint=none \
+-O canmount=off \
   nordix "${ROOT_DISK}"
 
 }
@@ -14,10 +16,10 @@ zfs create -o mountpoint=none \
 nordix/ROOT
 
 
-zfs create -o mountpoint=none \
+zfs create -o mountpoint=/ \
 -o canmount=noauto \
--o compression=zstd-5 \
--o recordsize=34k \
+-o compression=zstd-fast-500 \
+-o recordsize=64k \
 -o atime=off \
 -o copies=2 \
 -o checksum=fletcher4 \
@@ -26,8 +28,8 @@ zfs create -o mountpoint=none \
 -o sync=standard \
 -o logbias=latency \
 -o primarycache=all \
--o secondarycache=all \
-nordix/ROOT/default
+-o secondarycache=none \
+nordix/ROOT/base
  
 
 
@@ -35,7 +37,7 @@ nordix/ROOT/default
    
 zfs create -o mountpoint=/var/cache \
 -o canmount=on \
--o compression=zstd-1 \
+-o compression=zstd-fast-1000 \
 -o recordsize=32k \
 -o atime=off \
 -o sync=standard \
@@ -45,7 +47,7 @@ zfs create -o mountpoint=/var/cache \
 -o acltype=off \
 -o logbias=throughput \
 -o primarycache=all \
--o secondarycache=all \
+-o secondarycache=none \
 -o exec=off -o setuid=off -o devices=off nordix/varcache
 
 
@@ -53,10 +55,10 @@ zfs create -o mountpoint=/var/cache \
    
 zfs create -o mountpoint=/var/log \
 -o canmount=noauto \
--o compression=zstd-10 \
+-o compression=zstd-4 \
 -o recordsize=32k \
 -o atime=off \
--o sync=disabled \
+-o sync=standard \
 -o xattr=sa \
 -o copies=1 \
 -o checksum=fletcher4 \
@@ -64,14 +66,14 @@ zfs create -o mountpoint=/var/log \
 -o acltype=posixacl \
 -o logbias=throughput \
 -o primarycache=metadata \
--o secondarycache=metadata \
+-o secondarycache=none \
 -o exec=off -o setuid=off -o devices=off nordix/varlog
 
 
 zfs create -o mountpoint=/var/lib \
 -o canmount=on \
--o compression=zstd-5 \
--o recordsize=16k \
+-o compression=zstd-fast-1000 \
+-o recordsize=32k \
 -o atime=off \
 -o sync=standard \
 -o xattr=sa \
@@ -80,29 +82,29 @@ zfs create -o mountpoint=/var/lib \
 -o acltype=off \
 -o logbias=latency \
 -o primarycache=all \
--o secondarycache=all \
+-o secondarycache=none \
 -o devices=off -o setuid=off nordix/varlib
 
 zfs create -o mountpoint=/opt \
 -o canmount=noauto \
--o compression=zstd-4 \
+-o compression=zstd-fast-100 \
 -o recordsize=128K \
 -o atime=off \
--o copies=2 \
+-o copies=1 \
 -o checksum=fletcher4 \
 -o xattr=sa \
 -o acltype=posixacl \
 -o sync=standard \
 -o logbias=latency \
 -o primarycache=all \
--o secondarycache=all \
+-o secondarycache=none \
 nordix/opt
 
  
 zfs create -o mountpoint=/tmp \
--o canmount=noauto \
--o compression=lz4 \
--o recordsize=32k \
+-o canmount=on \
+-o compression=zstd-fast-1000 \
+-o recordsize=64k \
 -o atime=off \
 -o checksum=off \
 -o copies=1 \
@@ -110,17 +112,17 @@ zfs create -o mountpoint=/tmp \
 -o setuid=off \
 -o devices=off \
 -o acltype=posixacl \
--o sync=disabled \
+-o sync=standard \
 -o logbias=throughput \
--o primarycache=metadata \
--o secondarycache=metadata \
+-o primarycache=all \
+-o secondarycache=none \
 -o exec=off -o setuid=off -o devices=off nordix/tmp
 
     
 zfs create -o mountpoint=/var/tmp \
 -o canmount=noauto \
--o compression=lz4 \
--o recordsize=32k \
+-o compression=zstd-fast-1000 \
+-o recordsize=64k \
 -o atime=off \
 -o checksum=fletcher4 \
 -o copies=1 \
@@ -131,13 +133,12 @@ zfs create -o mountpoint=/var/tmp \
 -o sync=standard \
 -o logbias=throughput \
 -o primarycache=metadata \
--o secondarycache=metadata \
--o setuid=off -o devices=off nordix/vartmp
+-o secondarycache=off  nordix/vartmp
 
 zfs create -o mountpoint=/home \
 -o canmount=noauto \
--o compression=zstd-1 \
--o recordsize=64K \
+-o compression=lz4 \
+-o recordsize=128K \
 -o atime=off \
 -o xattr=sa \
 -o acltype=posixacl \
@@ -146,12 +147,11 @@ zfs create -o mountpoint=/home \
 -o checksum=fletcher4 \
 -o logbias=throughput \
 -o primarycache=all \
--o secondarycache=all \
--o setuid=off -o devices=off nordix/home
+-o secondarycache=none  nordix/home
 
 zfs create -o mountpoint=$HOME/.cache \
 -o canmount=on \
--o compression=zstd5 \
+-o compression=zstd5 \zfs get v
 -o recordsize=16k \
 -o atime=off \
 -o sync=standard \
