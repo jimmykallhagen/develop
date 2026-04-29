@@ -402,3 +402,9 @@ zfs create -V <storlek> \
 -o secondarycache=none \
 -o checksum=fletcher2 \
 poolnamn/vm/namn
+
+
+
+
+##########################
+
