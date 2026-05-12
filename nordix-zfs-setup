@@ -211,17 +211,18 @@ zfs create -o mountpoint=$HOME/Documents \
 
 zfs create -o mountpoint=$HOME/.config \
 -o canmount=on \
--o compression=zstd-5 \
+-o compression=lz4 \
 -o recordsize=32K \
 -o atime=off \
+-o redundant_metadata=all
 -o xattr=sa \
 -o acltype=posixacl \
 -o sync=standard \
--o copies=1 \
+-o copies=2 \
 -o checksum=fletcher4 \
 -o logbias=latency \
--o primarycache=all \
--o secondarycache=all \
+-o primarycache=metadata \
+-o secondarycache=none \
 -o setuid=off -o devices=off nordix/home/config
 
 
