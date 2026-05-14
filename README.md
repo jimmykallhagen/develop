@@ -16,3 +16,10 @@ I will not keep documentation on what all this is, if you are interested in some
 - Mail - **TheEnchantedPotato@proton.me**
 
 ---
+<a href="https://github.com/jimmykallhagen/Nordix">
+  <kbd>
+    <br>
+    &emsp;<b>VIEW ON GITHUB</b>&emsp;
+    <br><br>
+  </kbd>
+</a>
