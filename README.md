@@ -16,10 +16,28 @@ I will not keep documentation on what all this is, if you are interested in some
 - Mail - **TheEnchantedPotato@proton.me**
 
 ---
-<a href="https://github.com/jimmykallhagen/Nordix">
-  <kbd>
-    <br>
-    &emsp;<b>VIEW ON GITHUB</b>&emsp;
-    <br><br>
-  </kbd>
-</a>
+<table>
+  <tr>
+    <td bgcolor="#24292e" align="center">
+      <a href="https://github.com">
+        <font color="#ffffff">&nbsp; &nbsp; VIEW ON GITHUB &nbsp; &nbsp;</font>
+      </a>
+    </td>
+  </tr>
+</table><table>
+  <tr>
+    <td bgcolor="#24292e" align="center">
+      <a href="https://github.com">
+        <font color="#ffffff">&nbsp; &nbsp; VIEW ON GITHUB &nbsp; &nbsp;</font>
+      </a>
+    </td>
+  </tr>
+</table><table>
+  <tr>
+    <td bgcolor="#24292e" align="center">
+      <a href="https://github.com">
+        <font color="#ffffff">&nbsp; &nbsp; VIEW ON GITHUB &nbsp; &nbsp;</font>
+      </a>
+    </td>
+  </tr>
+</table>
