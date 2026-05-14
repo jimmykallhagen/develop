@@ -16,6 +16,3 @@ I will not keep documentation on what all this is, if you are interested in some
 - Mail - **TheEnchantedPotato@proton.me**
 
 ---
-<a href="https://github.com">
-  <img src="https://shields.io" alt="GitHub knapp">
-</a>
