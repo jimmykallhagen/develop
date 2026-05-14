@@ -16,5 +16,3 @@ I will not keep documentation on what all this is, if you are interested in some
 - Mail - **TheEnchantedPotato@proton.me**
 
 ---
-
-[![Nordix på GitHub](https://shields.io)](https://github.com/jimmykallhagen/Nordix)
