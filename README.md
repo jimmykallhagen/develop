@@ -17,4 +17,4 @@ I will not keep documentation on what all this is, if you are interested in some
 
 ---
 
-v[![GitHub](https://shields.io)](https://github.com/jimmykallhagen/Nordix)
+[![Nordix på GitHub](https://shields.io)](https://github.com/jimmykallhagen/Nordix)
