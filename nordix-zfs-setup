@@ -1,4 +1,25 @@
 
+
+
+sudo zpool create -f -o ashift=12 \
+-o autotrim=on \
+-o feature@large_dnode=enabled \
+-O redundant_metadata=most \
+-O dnodesize=auto \
+-O mountpoint=none \
+-O compression=zstd-fast-500 \
+-O recordsize=1M \
+-O atime=off \
+-O xattr=sa \
+-O sync=standard \
+-O checksum=fletcher4 \
+-O acltype=off \
+-O logbias=throughput \
+-O primarycache=metadata \
+-O secondarycache=all \
+-o autoexpand=on \
+
+
 zpool create -f \
   -o ashift=12 \
   -o autotrim=on \
